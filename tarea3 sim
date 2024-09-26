@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Función para calcular Pi usando el método de Montecarlo
+def montecarlo_pi(num_puntos):
+    dentro_circulo = 0
+
+    x_puntos = []
+    y_puntos = []
+    
+    for _ in range(num_puntos):
+        x = np.random.rand()
+        y = np.random.rand()
+
+        x_puntos.append(x)
+        y_puntos.append(y)
+        
+        if x**2 + y**2 <= 1:
+            dentro_circulo += 1
+
+    # Aproximación de Pi
+    pi_estimation = 4 * (dentro_circulo / num_puntos)
+    return pi_estimation, x_puntos, y_puntos
+
+# Parámetros
+num_puntos = 10000
+pi_estimado, x_puntos, y_puntos = montecarlo_pi(num_puntos)
+
+# Mostrar el resultado
+print(f"Estimación de Pi con {num_puntos} puntos: {pi_estimado}")
+
+# Graficar los puntos
+plt.figure(figsize=(6,6))
+plt.scatter(x_puntos, y_puntos, s=1)
+plt.title(f"Aproximación de Pi usando Montecarlo con {num_puntos} puntos")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.show()
